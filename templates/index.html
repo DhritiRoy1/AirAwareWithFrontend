@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Air Dashboard Full</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* The main dashboard background gradient */
+            background: linear-gradient(135deg, #4ADE80 0%, #10B981 100%);
+            min-height: 100vh;
+            color: #1F2937;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Common Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Glassy Header in Col 1 */
+        .glass-header {
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* The Big "28" Number */
+        .hero-score {
+            font-size: 96px;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Badge Colors */
+        .badge-green { background-color: #D1FAE5; color: #065F46; }
+        .badge-orange { background-color: #FFEDD5; color: #9A3412; }
+
+        /* Graph Lines (Simplified CSS drawing) */
+        .graph-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 100px;
+            gap: 5px;
+            padding-top: 20px;
+        }
+        .graph-bar {
+            width: 100%;
+            background: #D1FAE5;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        .graph-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #10B981;
+        }
+
+        /* Custom Scrollbar for lists */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="flex justify-between items-center mb-8 px-2">
+        <div class="flex items-center gap-3 text-white">
+            <div class="bg-white/20 p-2 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <span class="font-bold text-lg tracking-wide">Dashboard</span>
+        </div>
+        
+        <div class="flex items-center gap-2 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span class="text-3xl font-bold">1,250 Points</span>
+        </div>
+        
+        <div class="w-8"></div> <!-- Spacer for balance -->
+    </div>
+
+    <!-- Main Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto h-[calc(100vh-140px)]">
+
+        <!-- COLUMN 1: Status & Hero Score -->
+        <div class="flex flex-col h-full">
+            
+            <!-- Glassy "Air is Clean" Box -->
+            <div class="glass-header">
+                <h2 class="text-3xl font-extrabold mb-1">AIR IS CLEAN!</h2>
+                <p class="font-medium opacity-90">Keep up the great work.</p>
+                <!-- Subtle wave decoration could go here -->
+            </div>
+
+            <!-- The Big Score Area -->
+            <div class="flex flex-col items-center justify-center mb-8 flex-grow">
+                <div class="text-center">
+                    <div class="hero-score">28</div>
+                    <div class="text-white font-semibold text-lg opacity-90 mb-6">PM10 ug/m³</div>
+                    
+                    <!-- Floating Badges -->
+                    <div class="flex flex-col gap-3 w-full max-w-[200px]">
+                        <div class="badge-green px-4 py-2 rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            +100 Points
+                        </div>
+                        <div class="badge-orange px-4 py-2 rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8.5 14.5A2.5 2.5 0 0011 17c1.38 0 2.5-1.12 2.5-2.5 0-1.38-1.12-2.5-2.5-2.5a2.5 2.5 0 00-2.5 2.5M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.32 16.79c-.1.03-.22.02-.32-.03-.22-.11-.27-.41-.09-.58.74-.7 1.25-1.63 1.25-2.68 0-1.87-1.31-3.42-3.06-3.83-.24-.06-.41.22-.26.4.52.63.82 1.43.82 2.3 0 1.21-.59 2.27-1.49 2.94-.18.13-.12.42.1.47.74.15 1.51.15 2.25 0 .23-.05.47-.05.7.01z"></path></svg>
+                            3 Day Streak
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clean Places Card -->
+            <div class="card mt-auto">
+                <h3 class="font-bold text-lg mb-4">Clean Places Near You</h3>
+                <!-- Map Placeholder -->
+                <div class="h-24 bg-gray-100 rounded-xl mb-4 relative overflow-hidden bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/OpenStreetMap_Standard_Tile.png')] bg-cover bg-center">
+                    <div class="absolute inset-0 bg-white/30"></div>
+                    <!-- Pins -->
+                    <div class="absolute top-1/2 left-1/4 text-green-600"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                    <div class="absolute top-1/3 left-2/3 text-green-600"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                </div>
+                
+                <!-- List Item -->
+                <div class="bg-gray-50 rounded-xl p-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-gray-800">Central Park</div>
+                            <div class="text-[10px] text-gray-500">Canal Street</div>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-sm">+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMN 2: Streak & Achievements -->
+        <div class="flex flex-col gap-6">
+            
+            <!-- Streak Card -->
+            <div class="card">
+                <h3 class="font-bold text-lg mb-1">Clean Air Streak</h3>
+                <p class="text-xs text-gray-400 mb-4">Maintain your streak tomorrow!</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Trophy Box -->
+                    <div class="bg-green-50 rounded-xl p-4 flex flex-col items-center justify-center text-center h-32">
+                        <svg class="w-10 h-10 text-yellow-500 mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4V5c0-1.1-.9-2-2-2zm0 12c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V5h10v10z"></path></svg>
+                        <span class="text-xs font-bold text-green-800">First Step</span>
+                    </div>
+                    <!-- Leaf Box -->
+                    <div class="bg-green-50 rounded-xl p-4 flex flex-col items-center justify-center text-center h-32">
+                        <svg class="w-10 h-10 text-green-600 mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"></path></svg>
+                        <span class="text-xs font-bold text-green-800">One Day Wonder</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badges Card -->
+            <div class="card flex-grow">
+                <h3 class="font-bold text-lg mb-4">Badges & Achievements</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Lock Icon (Gray) -->
+                    <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-200">
+                        <svg class="w-12 h-12 text-gray-300 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <span class="text-xs font-bold text-gray-400">Green Light Guru</span>
+                        <div class="w-full bg-gray-200 h-1.5 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-green-500 h-full w-1/3"></div>
+                        </div>
+                    </div>
+                    <!-- Gold Medal -->
+                    <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+                        <div class="relative">
+                            <!-- Simple CSS Medal shape -->
+                            <div class="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-yellow-200 shadow-md">
+                                <svg class="w-8 h-8 text-yellow-700" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <!-- Ribbon tails -->
+                            <div class="absolute -bottom-2 -left-1 w-4 h-6 bg-red-500 -z-10 transform -rotate-12"></div>
+                            <div class="absolute -bottom-2 -right-1 w-4 h-6 bg-red-500 -z-10 transform rotate-12"></div>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-500 mt-2">85% to 500 pts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Card -->
+            <div class="card">
+                <h3 class="font-bold text-lg mb-2">Leaderboard</h3>
+                <div class="flex items-center justify-between text-sm bg-gray-50 p-3 rounded-lg">
+                    <span class="font-semibold text-gray-600">You: 1,290 pts</span>
+                    <span class="font-bold text-green-600">Top 50%</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMN 3: Data & Timeline -->
+        <div class="flex flex-col gap-6">
+            
+            <!-- Timeline Card -->
+            <div class="card">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-md">Your Air Quality Timeline</h3>
+                </div>
+                <!-- Status Indicators -->
+                <div class="flex gap-2 mb-4">
+                    <div class="text-xs text-gray-400 ml-auto flex items-center">24 Hours -></div>
+                </div>
+
+                <!-- Graph Area -->
+                <div class="relative h-32 w-full bg-green-50/50 rounded-lg border border-green-100 flex items-end justify-between px-2 pb-0 overflow-hidden">
+                    <!-- Fake SVG Line Graph -->
+                    {{Sensor_Reading}}
+                </div>
+                <div class="flex justify-between text-[10px] text-gray-400 mt-2 px-1">
+                    <span>24 Hours</span>
+                    <span>7 Days</span>
+                    <span>30 Days</span>
+                </div>
+            </div>
+
+            <!-- Clean Zone Map Card -->
+            <div class="card flex-grow">
+                <h3 class="font-bold text-lg mb-4">Clean Zone Map</h3>
+                <div class="w-full h-40 bg-gray-100 rounded-xl overflow-hidden bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/OpenStreetMap_Standard_Tile.png')] bg-cover relative">
+                    <!-- Random Dots -->
+                    <div class="absolute top-4 left-8 text-green-500"><svg width="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                    <div class="absolute top-10 right-10 text-green-500"><svg width="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                    <div class="absolute bottom-4 left-10 text-red-500"><svg width="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                    <div class="absolute bottom-10 right-20 text-green-500"><svg width="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+                </div>
+            </div>
+
+            <!-- Data Log Card -->
+            <div class="card">
+                <h3 class="font-bold text-lg mb-2">Data Log</h3>
+                <div class="flex justify-between items-center text-xs mb-2">
+                    <span class="text-gray-500">Clean Zones</span>
+                    <span class="text-gray-400">Unhealthy</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 bg-green-100 text-green-700 rounded flex items-center justify-center font-bold text-xs">B</div>
+                        <span class="text-sm font-semibold">0:90 -> 28 Good</span>
+                    </div>
+                    <span class="text-sm font-bold text-gray-700">35 Unhealthy</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
